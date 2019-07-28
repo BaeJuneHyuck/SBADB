@@ -1,0 +1,4 @@
+django~=2.2.0
+Pillow~=6.1.0
+django-debug-toolbar~=2.0
+djangorestframework~=3.10.1

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+
+    <meta charset="utf-8" />
+    <title>hero List</title>
+    <style>
+
+    h1, p {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background-color: #ddd;
+        text-align: center;
+    }
+
+    .hero {
+        background-color: white;
+        width: 300px;
+        text-align: center;
+        margin: 50px auto;
+        display:inline-block;
+    }
+
+
+    .hero:hover {
+        background-color: lightskyblue;
+    }
+
+    .hero h1 {
+        border-bottom: 5px solid;
+        width: 120px;
+        margin: 30px auto;
+        display:inline;
+    }
+
+    .hero h1.UTILITYPLAYER { color: lightgray; }
+    .hero h1.SUMMONER{ color: deepskyblue; }
+    .hero h1.WIDEAREA{ color: Purple; }
+    .hero h1.STRIKER { color: red; }
+    .hero h1.SUPPORTER{ color: hotpink; }
+
+    .hero img{
+        width:300px;
+        height:300px;
+        margin: 00px auto auto;
+        display:block;
+    }
+
+    .hero .desc{
+
+        color:black;
+        height:200px;
+        overflow :scroll;
+        overflow-x: hidden;
+        background-color: transparent;
+    }
+
+    .scrollbar
+    {
+        height:200px;
+	    background: #F5F5F5;
+    }
+
+    #style-5::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+    }
+
+
+    #style-5::-webkit-scrollbar
+    {
+        width: 10px;
+        background-color: #F5F5F5;
+    }
+
+    .hero p {
+        margin: 30px;
+    }
+
+    .skill {
+        background-color: #eee;
+        color: #999;
+        padding: 20px 0;
+        border-top: 1px solid #ccc;
+    }
+
+
+    .edge{
+        position:absolute;
+    }
+
+    .editbutton{
+        color:white;
+        background-color: black;
+        width:50px;
+        margin:5px;
+        border-radius:10px;;
+        position:relative;
+        right:0;
+    }
+
+    .addbutton{
+        font-size:15px;
+        position: fixed;
+        bottom: 2px;
+        right:2px;
+        color:white;
+        background-color: black;
+        width:10%;
+        height:7vh;
+        border: solid 5px white;
+        border-radius: 10px;
+    }
+
+    .addbutton:hover{
+        background-color: orange;
+    }
+
+    </style>
+
+</head>
+
+<body>
+        <div>
+            <a href="/hero/new/">
+            <button class="addbutton">
+                영웅 추가
+            </button></a>
+        </div>
+
+        {% for hero in hero_list %}
+            <div class="hero">
+                <div class="edge">
+                <a href = "/hero/{{  hero.pk }}/edit/"><button class="editbutton">수정</button></a>
+                </div>
+                {% if hero.photo  %} {# 문자열로 저장된경로가 존재하는지 확인 #}
+                <img src="{{ hero.photo.url }}">
+                {% endif %}
+
+                <h1 class="{{ hero.category.name }}">{{ hero.category.name }}</h1>
+
+                <h1>{{ hero.name }}</h1>
+
+                <div class="skill scrollbar desc" id="style-5"><p>{{ hero.desc }}</p></div>
+
+                <div>
+                    <a href="{{ hero.page_url }}" target="_blank">
+                    바로가기
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+
+</body>
+</html>
